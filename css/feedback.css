@@ -1,0 +1,15 @@
+.message {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 25px;
+}
+
+.feedback button {
+  align-self: center;
+  padding: 15px 20px;
+  background: transparent;
+  border: 2px solid black;
+  font-size: 15px;
+  font-weight: bold;
+}

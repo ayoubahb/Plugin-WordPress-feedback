@@ -23,7 +23,6 @@ function feedback_plugin_setup_menu()
 // Add the feedback form shortcode
 function my_feedback_form()
 {
-    // ob_start();
 
     // Check if a form has been submitted
     if (isset($_POST['submit_feedback'])) {
@@ -40,10 +39,7 @@ function my_feedback_form()
             'page_id' => $page_id
         );
         $wpdb->insert($table_name, $data);
-?>
-        <!-- <div class="feedback-form-success">
-            Thank you for your feedback!
-        </div> -->
+        ?>
     <?php
     }
     // Display the feedback form
@@ -75,8 +71,6 @@ function my_feedback_form()
     </script>
 <?php
 
-
-    //   return ob_get_clean();
 }
 add_shortcode('feedback_form', 'my_feedback_form');
 

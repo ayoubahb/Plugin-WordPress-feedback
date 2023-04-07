@@ -6,19 +6,20 @@ Version: 1.0
 Author: AHABBANE
 */
 
-add_action('admin_menu', 'feedback_plugin_setup_menu');
+
+add_action('init', 'register_feedback_form_shortcode');
 add_action('wp_enqueue_scripts', 'feedback_styles');
 
+function register_feedback_form_shortcode()
+{
+    add_shortcode('feedback_form', 'my_feedback_form');
+}
 
 function feedback_styles()
 {
     wp_enqueue_style('feedback-form', plugins_url('css/feedback.css', __FILE__));
 }
 
-function feedback_plugin_setup_menu()
-{
-    add_menu_page('Feedback Plugin Page', 'Feedback Plugin', 'manage_options', 'feedback-plugin', 'my_feedback_form');
-}
 
 // Add the feedback form shortcode
 function my_feedback_form()
@@ -39,7 +40,7 @@ function my_feedback_form()
             'page_id' => $page_id
         );
         $wpdb->insert($table_name, $data);
-        ?>
+?>
     <?php
     }
     // Display the feedback form
@@ -52,8 +53,8 @@ function my_feedback_form()
             <div class="note" style="margin-bottom:25px;">
                 <label for="note">Note</label>
                 <div style="display:flex;gap:10px;">
-                  <input type="range" min="0" max="5" name="note" onChange="rangeSlide(this.value)">
-                  <span id="rangeValue" style="font-size:20px;">3</span>
+                    <input type="range" min="0" max="5" name="note" onChange="rangeSlide(this.value)">
+                    <span id="rangeValue" style="font-size:20px;">3</span>
                 </div>
 
             </div>
@@ -72,7 +73,6 @@ function my_feedback_form()
 <?php
 
 }
-add_shortcode('feedback_form', 'my_feedback_form');
 
 // Create the feedback table in the database
 function feedback_table()
